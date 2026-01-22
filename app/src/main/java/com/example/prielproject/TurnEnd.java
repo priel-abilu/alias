@@ -36,7 +36,7 @@ public class TurnEnd extends AppCompatActivity {
         Button continue_btn = findViewById(R.id.continue_btn);
         continue_btn.setOnClickListener(view -> {
             Intent play_activity = new Intent(TurnEnd.this,Play.class);
-            startActivity(play_activity);
+            finish();
         });
     }
 }

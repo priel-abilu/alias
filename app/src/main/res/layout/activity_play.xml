@@ -25,13 +25,13 @@
         android:id="@+id/btnSkip"
         android:layout_width="130dp"
         android:layout_height="74dp"
-        android:text="Button" />
+        android:text="skip" />
 
     <Button
         android:id="@+id/btnNext"
         android:layout_width="126dp"
         android:layout_height="74dp"
-        android:text="Button" />
+        android:text="next" />
 
     <TextView
         android:id="@+id/forbidden"

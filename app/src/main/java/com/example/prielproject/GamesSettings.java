@@ -28,6 +28,7 @@ public class GamesSettings extends AppCompatActivity {
             String rounds = ((RadioButton) findViewById(rounds_RG.getCheckedRadioButtonId())).getText().toString();
 
             Intent play_activity = new Intent(GamesSettings.this,Play.class);
+            play_activity.putExtra("ORIGIN_ACTIVITY","GameSettings");
             play_activity.putExtra("teams",teams);
             play_activity.putExtra("rounds",rounds);
             startActivity(play_activity);

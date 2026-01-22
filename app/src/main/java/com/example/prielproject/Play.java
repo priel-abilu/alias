@@ -15,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Play extends AppCompatActivity implements Runnable {
@@ -28,6 +29,8 @@ public class Play extends AppCompatActivity implements Runnable {
     int current_team = 1;
     int current_round = 1;
     int current_time = 10;
+    private Thread timerThread;
+    boolean isFirstStart = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +43,12 @@ public class Play extends AppCompatActivity implements Runnable {
             return insets;
         });
         Intent intent = getIntent();
-        teams = Integer.parseInt(Objects.requireNonNull(intent.getStringExtra("teams")));
-        rounds = Integer.parseInt(Objects.requireNonNull(intent.getStringExtra("rounds")));
-        scores = new int[teams];
+        String origin = intent.getStringExtra("ORIGIN_ACTIVITY");
+        if ("GameSettings".equals(origin)) {
+            teams = Integer.parseInt(intent.getStringExtra("teams"));
+            rounds = Integer.parseInt(intent.getStringExtra("rounds"));
+            scores = new int[teams];
+        }
         refreseh_words();
         refresh_clock();
 
@@ -89,6 +95,34 @@ public class Play extends AppCompatActivity implements Runnable {
         backgroundThread.start();
     }
 
+
+    private void startTimer() {
+        timerThread = new Thread(() -> {
+            while (current_time > 0) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    return;
+                }
+
+                runOnUiThread(() -> {
+                    current_time--;
+                    refresh_clock();
+                });
+            }
+
+            runOnUiThread(() -> {
+                Intent intent = new Intent(Play.this, TurnEnd.class);
+                intent.putExtra("score", scores[current_team - 1]);
+                intent.putExtra("team", current_team);
+                startActivity(intent);
+            });
+        });
+
+        timerThread.start();
+    }
+
+
     public void refreseh_words() {
         TextView Word = findViewById(R.id.Word);
         TextView ForbiddenWord = findViewById(R.id.forbidden);
@@ -108,28 +142,39 @@ public class Play extends AppCompatActivity implements Runnable {
         refresh_clock();
 
     }
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putInt("teams",teams);
-        outState.putInt("rounds",rounds);
-        outState.putIntArray("scores",scores);
-        outState.putInt("current_team",current_team);
-        outState.putInt("current_round",current_round);
-        // call superclass to save any view hierarchy
-        super.onSaveInstanceState(outState);
-    }
 
     @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState){
-        teams = savedInstanceState.getInt("teams");
-        rounds = savedInstanceState.getInt("rounds");
-        scores = savedInstanceState.getIntArray("scores");
-        current_team = savedInstanceState.getInt("current_team")+1;
-        if(current_team>teams){
-            current_round = savedInstanceState.getInt("current_round") +1;
-            current_team = 1;
+    protected void onResume() {
+        super.onResume();
+
+        if (!isFirstStart) {
+            current_team++;
+            if (current_team > teams) {
+                current_team = 1;
+                current_round++;
+            }
         }
-        else
-            current_round = savedInstanceState.getInt("current_round");
+
+        isFirstStart = false;
+
+        if (current_round > rounds) {
+            startActivity(new Intent(this, GameOver.class));
+            finish();
+            return;
+        }
+
+        current_time = 10;
+        refreseh_words();
+        refresh_clock();
+        startTimer();
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (timerThread != null) {
+            timerThread.interrupt();
+        }
+    }
+
+
 }

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.PrielProject"
         tools:targetApi="31">
         <activity
+            android:name=".GameOver"
+            android:exported="false" />
+        <activity
             android:name=".TurnEnd"
             android:exported="false" />
         <activity
