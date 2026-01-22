@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    android:background="@drawable/background1"
+
+    android:padding="16dp">
+
+        <!-- כותרת המסך -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="כללי המשחק"
+            android:textColor="#530462"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
+
+        <!-- הוראות המשחק -->
+        <TextView
+            android:id="@+id/instructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="מטרה: לנחש את המילים על כרטיסי הטאבו\nהטאבוא מגביל להשתמש במילים האסורות."
+            android:textColor="#070707"
+            android:textSize="18sp"
+            android:layout_below="@id/title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:lineSpacingExtra="8dp" />
+
+        <!-- הוראות נוספות -->
+        <TextView
+            android:id="@+id/rules"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="• כל סבב, שחקן אחד מהקבוצה יבחר כרטיס טאבו ויתאר את המילה שעליו מבלי להשתמש במילים האסורות.\n\n• אם הצוות שלו מנחש את המילה הנכונה, הם מקבלים נקודה.\n\n• אם השחקן השתמש במילה אסורה, הקבוצה השנייה מקבלת נקודה.\n\n• הסיבוב נגמר כשרוב הכרטיסים הושלמו או בזמן שהוקצב.\n\n• זוכה: הקבוצה עם הכי הרבה נקודות בסוף המשחק."
+            android:textColor="#0B0A0A"
+            android:textSize="16sp"
+            android:layout_below="@id/instructions"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:lineSpacingExtra="8dp"
+            android:fontFamily=""/>
+
+        <!-- כפתור לחזרה למסך הראשי -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="124dp"
+        android:layout_height="86dp"
+        android:layout_below="@id/rules"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="חזרה"
+        android:textColor="#E4CDCD" />
+
+</RelativeLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:gravity="center_horizontal"
+    android:background="@drawable/background"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="125dp"
+        android:layout_height="135dp"
+        android:layout_marginTop="103dp"
+        android:text="Elias"
+
+        android:textSize="50dp" />
+
+    <Button
+        android:id="@+id/play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="שחק"
+        android:textSize="30dp"
+        android:layout_marginTop="100dp"/>
+
+    <Button
+        android:id="@+id/gameRules"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="כללי משחק"
+        android:textSize="30dp"
+        android:layout_marginTop="30dp"/>
+
+</LinearLayout>
