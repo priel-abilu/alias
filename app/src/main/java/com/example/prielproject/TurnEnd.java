@@ -2,6 +2,7 @@ package com.example.prielproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -24,6 +25,8 @@ public class TurnEnd extends AppCompatActivity {
             return insets;
         });
 
+        Log.d("TurnEnd","Started activity");
+
         Intent intent = getIntent();
         int score = intent.getIntExtra("score", 0);
         int team = intent.getIntExtra("team", 0);
@@ -35,7 +38,6 @@ public class TurnEnd extends AppCompatActivity {
 
         Button continue_btn = findViewById(R.id.continue_btn);
         continue_btn.setOnClickListener(view -> {
-            Intent play_activity = new Intent(TurnEnd.this,Play.class);
             finish();
         });
     }
